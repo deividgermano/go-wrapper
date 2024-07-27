@@ -1,0 +1,14 @@
+#!/bin/bash
+
+temp_file=$(mktemp /tmp/go_code.XXXXXX.go)
+temp_file_out=$(mktemp /tmp/go_code.XXXXXX.go)
+
+tail -n +2 "$@" > "$temp_file"
+
+go run "$temp_file"
+
+exit_status=$?
+
+rm "$temp_file"
+
+exit $exit_status
